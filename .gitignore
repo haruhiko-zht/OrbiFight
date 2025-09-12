@@ -1,2 +1,34 @@
-/misc
+# Root
 .env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+server/logs/
+
+# Prisma
+server/prisma/dev.db*
+server/prisma/*.db-journal
+
+# Project specific
+/misc
