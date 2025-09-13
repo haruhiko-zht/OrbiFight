@@ -1,17 +1,18 @@
 volumes:
   mysql_data_vol:
   mysql_log:
-  redis:
 
 services:
   nginx:
     image: nginx:1.25-alpine
+    profiles: ["nginx"]
     command: /bin/sh -c "envsubst '$$NODE_PROXY_PORT'< /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
     ports:
       - 127.0.0.1:${NGINX_HTTP_PORT:-80}:80
     volumes:
       - ./infra/docker/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./infra/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf.template
+      - ./client/dist:/usr/share/nginx/html:ro
     environment:
       - TZ=${TZ:-Asia/Tokyo}
       - NODE_PROXY_PORT=${APP_PORT}
@@ -42,19 +43,6 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_TEST_DATABASE_PREFIX=${MYSQL_TEST_DATABASE_PREFIX:-_test_}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "5m"
-        max-file: "1"
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - 127.0.0.1:${REDIS_PORT:-6379}:6379
-    volumes:
-      - redis:/data
-    restart: unless-stopped
     logging:
       driver: "json-file"
       options:
