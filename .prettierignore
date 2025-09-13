@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+coverage
+server/prisma/*.db-journal
+server/prisma/dev.db*
+server/logs
+*.log
+
