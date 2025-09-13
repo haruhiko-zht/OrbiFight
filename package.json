@@ -1,0 +1,20 @@
+{
+  "name": "orbifight",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "dev:server": "npm run --workspace server dev",
+    "dev:client": "npm run --workspace client dev",
+    "dev": "concurrently -n server,client -c green,blue \"npm:dev:server\" \"npm:dev:client\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "concurrently": "^8.2.2"
+  }
+}
