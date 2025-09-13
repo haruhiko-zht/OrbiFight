@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoBattle Template</title>
+    <style>
+      html,
+      body,
+      #root {
+        height: 100%;
+        margin: 0;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        height: 100%;
+      }
+      .sidebar {
+        padding: 12px;
+        border-right: 1px solid #ddd;
+        font-family: ui-sans-serif, system-ui;
+      }
+      .content {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

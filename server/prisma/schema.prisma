@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model PartySnapshot {
+  id        String                @id @default(cuid())
+  createdAt DateTime              @default(now())
+  members   PartySnapshotMember[]
+}
+
+model PartySnapshotMember {
+  id        String @id @default(cuid())
+  partyId   String
+  slot      Int
+  character String
+  head      String
+  shoes     String
+  weapon    String
+  stats     Json
+  meta      Json?
+
+  party PartySnapshot @relation(fields: [partyId], references: [id])
+}
+
+model Replay {
+  id        String   @id @default(cuid())
+  version   Int
+  seed      String
+  init      Json
+  result    String
+  duration  Int
+  events    Bytes?
+  createdAt DateTime @default(now())
+}
+
+model Match {
+  id        String   @id @default(cuid())
+  aPartyId  String
+  bPartyId  String
+  seed      String
+  timeLimit Int
+  arena     Json
+  result    String
+  duration  Int
+  replayId  String?
+  createdAt DateTime @default(now())
+}
