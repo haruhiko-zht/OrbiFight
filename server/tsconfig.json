@@ -1,11 +1,6 @@
 {
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "strict": true,
     "outDir": "dist",
     "baseUrl": "."
   },
