@@ -9,4 +9,18 @@ export default defineConfig({
   plugins: [react()],
   server: { port: 5173, host: true },
   define: { __API__: JSON.stringify(apiBase) },
+  build: {
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('phaser')) return 'vendor-phaser';
+            if (id.includes('react') || id.includes('react-dom')) return 'vendor-react';
+            return 'vendor';
+          }
+        },
+      },
+    },
+  },
 });
